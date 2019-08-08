@@ -6,30 +6,21 @@ COPY Gemfile* ./
 RUN set -x \
   && apk update \
   && apk upgrade \
-  && apk add --update --no-cache bash           \
-                                 git            \
-                                 gmp-dev        \
-                                 openssh        \
-                                 nodejs-current \
-                                 nodejs-npm     \
-                                 postgresql     \
-                                 python2        \
-                                 tzdata         \
-                                 yaml           \
-                                 yarn           \
-  && apk add --update --no-cache --virtual build-dependencies \
-                                           build-base         \
-                                           curl-dev           \
-                                           gcc                \
-                                           libc-dev           \
-                                           libxml2-dev        \
-                                           libxslt-dev        \
-                                           linux-headers      \
-                                           make               \
-                                           postgresql-dev     \
+  && apk add --update --no-cache alpine-sdk      \
+                                 bash            \ 
+                                 gmp-dev         \
+                                 libxml2-dev     \
+                                 libxslt-dev     \
+                                 nodejs          \
+                                 openssh         \
+                                 postgresql      \
+                                 postgresql-dev  \
+                                 python2         \
+                                 tzdata          \
+                                 yaml            \
+                                 yarn            \
   && gem install bundler \
-  && bundle install --path vendor/bundle -j4 \
-  && apk del build-dependencies
+  && bundle install --path vendor/bundle -j4 
 COPY . ./
 
 # Add a script to be executed every time the container starts.

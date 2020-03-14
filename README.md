@@ -12,7 +12,8 @@ This is the Dockerfile and docker-compose.yml templates for Ruby on Rails applic
 Before execute the below commands, change versions, hostname, ports, base image or others if you want.
 ```sh
 $ docker-compose build
-$ docker-compose run app bundle exec rails new . --force --no-deps --database=postgresql --skip-test
+$ docker-compose bundle update
+$ docker-compose run app bundle exec rails new . --force --no-deps --database=postgresql --skip-test --api
 ```
 After that you must change database.yml like belows to connect to your database container.
 ```yml
@@ -27,7 +28,7 @@ default: &default
 ```
 Continue re-build images, run container and create database.
 ```sh
-$ docker-compose run --rm app bundle install --path vendor/bundle -j4
+$ docker-compose run --rm app bundle
 $ docker-compose up --build
 $ docker-compose run --rm app bin/rails db:create db:migrate
 ```

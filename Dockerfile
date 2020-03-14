@@ -22,7 +22,8 @@ RUN set -x \
                                  yaml            \
                                  yarn            \
   && gem install bundler \
-  && bundle install --path vendor/bundle -j4 
+  && bundle config set path 'vendor/bundle' \
+  && bundle install -j8
 COPY . ./
 
 # Add a script to be executed every time the container starts.
